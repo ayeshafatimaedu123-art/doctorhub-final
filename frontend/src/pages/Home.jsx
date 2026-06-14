@@ -8,18 +8,20 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 font-sans">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
+      <nav role="navigation" className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-teal-500 rounded-xl flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            </div>
-            <span className="font-bold text-xl text-slate-900 dark:text-white">Doctor Hub</span>
+            <Link to="/" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-primary-400 rounded">
+              <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-teal-500 rounded-xl flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              </div>
+              <span className="font-bold text-xl text-slate-900 dark:text-white">Doctor Hub</span>
+            </Link>
           </div>
           <div className="flex items-center gap-3">
             <Link to="/doctors" className="hidden sm:block text-slate-600 dark:text-slate-400 hover:text-primary-600 font-medium text-sm transition-colors">Find Doctors</Link>
             {isAuthenticated ? (
-              <Link to={dashboardPath} className="btn-primary py-2 text-sm">Go to Dashboard</Link>
+              <Link to={dashboardPath} className="btn-primary py-2 text-sm">Dashboard</Link>
             ) : (
               <>
                 <Link to="/login" className="btn-secondary py-2 text-sm">Login</Link>
@@ -53,15 +55,7 @@ const Home = () => {
             <Link to="/register" className="btn-secondary text-base py-3.5 px-8">Create Free Account</Link>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-            {[{v:'500+',l:'Verified Doctors'},{v:'10K+',l:'Patients Served'},{v:'3',l:'Treatment Types'},{v:'99%',l:'Satisfaction Rate'}].map(s => (
-              <div key={s.l} className="text-center">
-                <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{s.v}</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">{s.l}</p>
-              </div>
-            ))}
-          </div>
+          {/* Stats removed as requested */}
         </div>
       </section>
 
@@ -133,19 +127,40 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 py-10 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-gradient-to-br from-primary-500 to-teal-500 rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-12 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-teal-500 rounded-lg flex items-center justify-center mt-1">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
             </div>
-            <span className="font-bold text-slate-900 dark:text-white">Doctor Hub</span>
+            <div>
+              <span className="font-bold text-slate-900 dark:text-white">Doctor Hub</span>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Connecting patients with verified doctors across Pakistan.</p>
+            </div>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400">© 2024 Doctor Hub. Built as FYP — BSCS Final Year Project.</p>
-          <div className="flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
-            <Link to="/doctors" className="hover:text-primary-600 transition-colors">Find Doctors</Link>
-            <Link to="/login" className="hover:text-primary-600 transition-colors">Login</Link>
-            <Link to="/register" className="hover:text-primary-600 transition-colors">Register</Link>
+
+          <div className="flex gap-12 md:justify-center">
+            <div>
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Explore</h4>
+              <div className="flex flex-col gap-2 text-sm text-slate-500 dark:text-slate-400">
+                <Link to="/doctors" className="hover:text-primary-600 transition-colors">Find Doctors</Link>
+                <Link to="/appointments" className="hover:text-primary-600 transition-colors">Appointments</Link>
+                <Link to="/prescriptions" className="hover:text-primary-600 transition-colors">Prescriptions</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Support</h4>
+              <div className="flex flex-col gap-2 text-sm text-slate-500 dark:text-slate-400">
+                <Link to="/login" className="hover:text-primary-600 transition-colors">Login</Link>
+                <Link to="/register" className="hover:text-primary-600 transition-colors">Register</Link>
+                <a href="mailto:help@doctorhub.example" className="hover:text-primary-600 transition-colors">Contact</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-sm text-slate-500 dark:text-slate-400 md:text-right">
+            <div>© 2024 Doctor Hub. All rights reserved.</div>
+            <div className="mt-2">Built as a BSCS final year project.</div>
           </div>
         </div>
       </footer>
