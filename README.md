@@ -145,6 +145,8 @@ doctor-hub/
 3. Framework: Vite
 4. Add: `VITE_API_URL=https://your-render-url.onrender.com`
 
+<img width="1917" height="1017" alt="Screenshot 2026-06-14 174759" src="https://github.com/user-attachments/assets/57b62c69-70b7-429e-a030-6213a0a4717d" />
+
 ---
 
 © 2024 Doctor Hub — BSCS Final Year Project
