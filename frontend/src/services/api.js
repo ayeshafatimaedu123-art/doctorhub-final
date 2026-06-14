@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
+  : 'https://charming-adaptation-production-2fb1.up.railway.app/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
