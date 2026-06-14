@@ -9,7 +9,8 @@ const TREATMENT_TYPES = ['', 'Allopathic', 'Homeopathic', 'Herbal'];
 
 const DoctorSearch = () => {
   const dispatch = useDispatch();
-  const { list: doctors, loading, total, pages } = useSelector(s => s.doctors);
+  const { list, loading, total, pages } = useSelector(s => s.doctors);
+  const doctors = list ?? [];
   const [filters, setFilters] = useState({ search: '', treatmentType: '', city: '', disease: '', minFee: '', maxFee: '', page: 1 });
   const [showFilters, setShowFilters] = useState(false);
 

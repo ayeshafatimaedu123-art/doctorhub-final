@@ -58,7 +58,7 @@ const DoctorCard = ({ doctor }) => {
               {doctor.diseases.slice(0, 3).map(d => (
                 <span key={d} className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-lg">{d}</span>
               ))}
-              {doctor.diseases.length > 3 && (
+              {doctor.diseases?.length > 3 && (
                 <span className="text-xs text-slate-400 dark:text-slate-500 px-2.5 py-1">+{doctor.diseases.length - 3} more</span>
               )}
             </div>

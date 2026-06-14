@@ -4,7 +4,9 @@ import toast from 'react-hot-toast';
 
 export const fetchDoctors = createAsyncThunk('doctors/fetchAll', async (params, { rejectWithValue }) => {
   try {
+    console.log('[fetchDoctors] params:', params);
     const res = await api.get('/doctors', { params });
+    console.log('[fetchDoctors] response:', res?.data);
     return res.data;
   } catch (err) { return rejectWithValue(err.response?.data?.message); }
 });
@@ -46,7 +48,12 @@ const doctorSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDoctors.pending, (state) => { state.loading = true; })
-      .addCase(fetchDoctors.fulfilled, (state, action) => { state.loading = false; state.list = action.payload.data; state.total = action.payload.total; state.pages = action.payload.pages; })
+      .addCase(fetchDoctors.fulfilled, (state, action) => {
+        state.loading = false;
+        state.list = action.payload?.data ?? [];
+        state.total = action.payload?.total ?? 0;
+        state.pages = action.payload?.pages ?? 1;
+      })
       .addCase(fetchDoctors.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
       .addCase(fetchDoctor.fulfilled, (state, action) => { state.selected = action.payload; })
       .addCase(createDoctor.fulfilled, (state, action) => { state.myProfile = action.payload; })
