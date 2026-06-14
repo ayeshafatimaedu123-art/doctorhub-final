@@ -14,12 +14,33 @@ connectDB();
 const app = express();
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+
+// CORS Fix
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function(origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://doctor-hub-supabase.vercel.app',
+      process.env.CLIENT_URL
+    ].filter(Boolean);
+
+    // Allow requests with no origin (mobile apps, Postman)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Sab allow karo production mein
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20 });
@@ -48,5 +69,5 @@ app.get('/api/health', (req, res) => res.json({ success: true, message: 'Running
 app.use((req, res) => res.status(404).json({ success: false, message: 'Route not found' }));
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
