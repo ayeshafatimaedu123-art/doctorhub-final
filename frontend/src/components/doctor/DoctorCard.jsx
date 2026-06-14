@@ -75,7 +75,7 @@ const DoctorCard = ({ doctor }) => {
           </p>
         </div>
         <Link
-          to={`/doctors/${doctor._id}`}
+          to={`/doctors/${doctor._id || doctor.id}`}
           className="btn-primary text-sm py-2 px-4"
         >
           Book Appointment

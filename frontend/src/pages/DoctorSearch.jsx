@@ -101,7 +101,7 @@ const DoctorSearch = () => {
         ) : (
           <>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {doctors.map(doctor => <DoctorCard key={doctor._id} doctor={doctor} />)}
+              {doctors.map(doctor => <DoctorCard key={doctor._id || doctor.id} doctor={doctor} />)}
             </div>
             {/* Pagination */}
             {pages > 1 && (
