@@ -5,12 +5,12 @@ const ws = require('ws');
 require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('❌ Supabase URL aur Service Key .env mein set karo!');
   console.error('   SUPABASE_URL:', supabaseUrl ? '✅ Set' : '❌ Missing');
-  console.error('   SUPABASE_SERVICE_KEY:', supabaseKey ? '✅ Set' : '❌ Missing');
+  console.error('   SUPABASE_SERVICE_ROLE_KEY:', supabaseKey ? '✅ Set' : '❌ Missing');
   process.exit(1);
 }
 
